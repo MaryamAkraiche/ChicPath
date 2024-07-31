@@ -6,23 +6,25 @@ function Header() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   return (
-    <header>
+    <header className="bg-orange-100 p-4">
       <div>
         <div className="flex justify-between items-center">
-          <h1 className="text-5xl">ChicPath</h1>
           <nav>
-            <a href="/">
+            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="/">
               Home
             </a>
           </nav>
-          <div className="flex justify-around">
-            <a href="./Signup">
+          <a href="http://localhost:5173/">
+          <h1 className="text-5xl">ChicPath</h1>
+          </a>
+          <nav className="flex flex-col md:flex-row mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-4">
+            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="./Signup">
               Sign up
             </a>
-            <a href="./Login">
+            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="./Login">
               Login
             </a>
-          </div>
+          </nav>
         </div>
         {isHomePage && <HeaderSlogan />}
       </div>
