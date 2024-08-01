@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer>
-      <hr/>
-      <div>
-        <h2 className="text-3xl">
-          ChicPath
-        </h2>
+    <footer className="bg-zinc-900 text-gray-100">
+      <div className="flex justify-around">
+          <a className=" content-center " href="http://localhost:5173/">
+            <h1 className="slogan text-4xl">ChicPath</h1>
+          </a>
         <div>
+          <h3>About Us</h3>
           <p>
             <span>
               <i className="fa-solid fa-location-dot"></i>
@@ -23,36 +23,26 @@ function Footer() {
               </span>
               (123) 456-7890
             </p>
+          </div>
+          <div>
+            <h3>Social Media</h3>
             <p>
-              <span>
-                <i className="fa-solid fa-print"></i>
+              <span className="mx-5">
+                <i className="fa-brands fa-facebook-f"></i>
               </span>
-              (123) 456-7890
+                <i className="fa-brands fa-instagram"></i>
             </p>
           </div>
         </div>
+        <div>
+          <nav>
+            <Link to="/">HOME</Link>
+            <Link to="/">Women</Link>
+            <Link to="/">Men</Link>
+          </nav>
+        </div>
       </div>
-      <ul>
-        <li>Social Media</li>
-        <li>
-          <span>
-            <i className="fa-brands fa-facebook-f"></i>
-          </span>
-        </li>
-        <li>
-          <span>
-            <i className="fa-brands fa-instagram"></i>
-          </span>
-        </li>
-      </ul>
-      <hr/>
-      <div>
-        <nav >
-          <Link to="/">HOME</Link>
-          {/* <Link to="/Invoices" className="hover:text-cogip-color">INVOICES</Link> */}
-        </nav>
-        <p>Copyright © 2022 • ChicPath Inc.</p>
-      </div>
+      <p className="py-4 text-center">Copyright © 2022 • ChicPath Inc.</p>
     </footer>
   );
 }

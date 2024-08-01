@@ -4,13 +4,13 @@ import path from "../assets/path.png";
 function Header_slogan() {
   return (
     <div>
-      <p className="text-3xl font-Inter font-black slogan">
+      <p className="absolute mt-14 ml-28 text-3xl font-Inter font-black slogan">
         Walk The Path To Chic !
       </p>
       <img 
         src={path} 
         alt="path" 
-        className="w-64"
+        className="relative w-64"
       />
     </div>
   );

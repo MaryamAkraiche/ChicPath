@@ -2,34 +2,23 @@ import React from 'react';
 
 function Signup() {
   return (
-    <div className="flex font-Roboto items-center justify-center p-8">
+    <div className="flex font-Inter items-center justify-center p-8">
       <form className="p-6 rounded shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4 flex items-center justify-center">Sign Up</h2>
-        <div className="mb-4">
-          <label className="block text-gray-700">Email</label>
+        <h2 className="text-2xl mb-4 flex items-center justify-center">Sign Up</h2>
+          <input placeholder='Full Name' className="mb-4 mt-1 p-2 w-full border border-gray-300 rounded" type="text" name="username" />
           <input
             type="email"
+            placeholder='example@gmail.com'
             required
-            className="mt-1 p-2 w-full border border-gray-300 rounded"
+            className="mb-4 mt-1 p-2 w-full border border-gray-300 rounded"
           />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="username">First Name</label>
-          <input className="mt-1 p-2 w-full border border-gray-300 rounded" type="text" id="username" name="username" />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="username">Last Name</label>
-          <input className="mt-1 p-2 w-full border border-gray-300 rounded" type="text" id="username" name="username" />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Password</label>
           <input
             type="password"
+            placeholder='password'
             required
-            className="mt-1 p-2 w-full border border-gray-300 rounded"
+            className="mb-4 mt-1 p-2 w-full border border-gray-300 rounded"
           />
-        </div>
-        <button type="submit" className="w-full bg-blue-200 font-black p-2 rounded hover:bg-blue-300">
+        <button type="submit" className="w-full bg-emerald-200 p-2 rounded hover:bg-emerald-300">
           Sign up
         </button>
       </form>

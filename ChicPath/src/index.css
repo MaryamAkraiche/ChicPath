@@ -13,3 +13,27 @@ h1{
 a{
     font-family: inter;
 }
+
+/* Ensure these styles are in your Tailwind setup */
+.relative {
+    position: relative;
+  }
+  
+  .absolute {
+    position: absolute;
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  
+  .hover\:bg-orange-100:hover {
+    background-color: #f8e8d4;
+  }
+
+  
