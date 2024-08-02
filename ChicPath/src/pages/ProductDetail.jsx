@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import item1 from "../assets/item1.png";
 import item2 from "../assets/item2.png";
@@ -37,20 +37,44 @@ function ProductDetail() {
 
   const [selectedSize, setSelectedSize] = useState(product?.sizes[0] || '');
   const [quantity, setQuantity] = useState(1);
+  const [wishlist, setWishlist] = useState([]);
 
-  if (!product) {
-    return <div className="container mx-auto p-6 text-center text-red-500">Product not found</div>;
-  }
+  useEffect(() => {
+    const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    setWishlist(storedWishlist);
+  }, []);
 
   const handleAddToCart = () => {
     console.log(`Added to cart: ${product.name}, Size: ${selectedSize}, Quantity: ${quantity}`);
   };
 
+  const toggleWishlist = () => {
+    let updatedWishlist = [];
+    if (wishlist.find(item => item.id === product.id)) {
+      updatedWishlist = wishlist.filter(item => item.id !== product.id);
+    } else {
+      updatedWishlist = [...wishlist, product];
+    }
+    setWishlist(updatedWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
+
+  const isProductInWishlist = wishlist.some(item => item.id === product.id);
+
+  if (!product) {
+    return <div className="container mx-auto p-6 text-center text-red-500">Product not found</div>;
+  }
+
   return (
     <div className="container mx-auto p-6">
       <div className="flex flex-col md:flex-row items-center bg-white overflow-hidden">
-        <img src={product.image} alt={product.name} className="w-fit bg-gray-50 md:w-1/2 h-auto object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none" />
-        <div className="p-6 md:p-10">
+        <div className="relative w-full md:w-1/2">
+          <img src={product.image} alt={product.name} className="w-full h-auto object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none" />
+          <button onClick={toggleWishlist} className="absolute top-4 right-4 text-2xl text-red-500">
+            <i className={`fa${isProductInWishlist ? 's' : 'r'} fa-heart`} />
+          </button>
+        </div>
+        <div className="p-6 md:p-10 w-full">
           <h2 className="text-4xl font-bold mb-4 text-gray-800">{product.name}</h2>
           <p className="text-2xl font-semibold mb-4 text-gray-700">€{product.price.toFixed(2)}</p>
           <p className="text-gray-700 mb-6">{product.description}</p>
@@ -58,11 +82,11 @@ function ProductDetail() {
           <div className="mb-4">
             <label htmlFor="size" className="block text-gray-700 mb-2">Size</label>
             <select
-              id="size"
               value={selectedSize}
               onChange={(e) => setSelectedSize(e.target.value)}
               className="block w-fit p-2 border border-gray-300 rounded"
             >
+              <option value="" disabled>Select a size</option>
               {product.sizes.map(size => (
                 <option key={size} value={size}>{size}</option>
               ))}
@@ -73,14 +97,13 @@ function ProductDetail() {
             <label htmlFor="quantity" className="block text-gray-700 mb-2">Quantity</label>
             <input
               type="number"
-              id="quantity"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
               min="1"
               className="block w-fit p-2 border border-gray-300 rounded"
+              placeholder="1"
             />
           </div>
-
           <button
             onClick={handleAddToCart}
             className="bg-emerald-500 text-white px-6 py-3 rounded-full hover:bg-emerald-600 transition-colors duration-300"

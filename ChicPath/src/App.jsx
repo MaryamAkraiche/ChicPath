@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import Shopping from './pages/Shopping';
+import Wishlist from './pages/Wishlist';
 import Signup from './forms/Signup';
 import Login from './forms/Login';
 
@@ -20,6 +21,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/Wishlist" element={<Wishlist />} />
                 <Route path="/shopping" element={<Shopping />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />

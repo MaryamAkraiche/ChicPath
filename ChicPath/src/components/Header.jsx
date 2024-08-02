@@ -15,13 +15,13 @@ function Header() {
       <div>
         <div className="flex justify-between items-center">
           <nav>
-            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="/">
+            <a className="link-header hover:bg-white rounded-lg p-2 md:p-3" href="/">
               Home
             </a>
-            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="/">
+            <a className="link-header hover:bg-white rounded-lg p-2 md:p-3" href="/">
               Women
             </a>
-            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="/">
+            <a className="link-header hover:bg-white rounded-lg p-2 md:p-3" href="/">
               Men
             </a>
           </nav>
@@ -29,10 +29,10 @@ function Header() {
             <h1 className="text-5xl">ChicPath</h1>
           </a>
           <nav className="flex flex-col md:flex-row mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-4">
-            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="./Shopping">
+            <a className="link-header hover:bg-white rounded-lg p-2 md:p-3" href="/">
               <i class="fa-solid fa-magnifying-glass"></i>
             </a>
-            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="">
+            <a className="link-header hover:bg-white rounded-lg p-2 md:p-3" href="../Wishlist">
               <i class="fa-solid fa-heart"></i>
             </a>
             <div 
@@ -45,17 +45,17 @@ function Header() {
               </a>
               {showDropdown && (
                 <div className="absolute right-0 mt-32 bg-white shadow-lg rounded-lg border border-gray-200 w-40">
-                  <a href="./Login" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">
+                  <a href="../Login" className="link-header block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">
                     Login
                   </a>
-                  <a href="./Signup" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">
+                  <a href="../Signup" className="link-header block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">
                     Sign Up
                   </a>
                 </div>
               )}
             </div>
-            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="./Shopping">
-              <i className="fa-solid fa-bag-shopping"></i>
+            <a className="link-header hover:bg-white rounded-lg p-2 md:p-3" href="../Shopping">
+              <i class="fa-solid fa-cart-shopping"></i>
             </a>
           </nav>
         </div>
