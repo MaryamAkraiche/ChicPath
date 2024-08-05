@@ -1,28 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import HeaderSlogan from "./HeaderSlogan";
 
 function Header() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleMouseEnter = () => setShowDropdown(true);
+  const handleMouseLeave = () => setShowDropdown(false);
+
+  const isActive = (path) => location.pathname === path ? 'active-link' : '';
+
   return (
-    <header className="bg-orange-100 p-4">
+    <header className="bg-gray-100 p-4">
       <div>
         <div className="flex justify-between items-center">
           <nav>
-            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="/">
+            <a className={`link-header rounded-lg m-2 md:m-3 ${isActive('/')}`} href="/">
               Home
+            </a>
+            <a className={`link-header rounded-lg m-2 md:m-3 ${isActive('/women')}`} href="/women">
+              Women
+            </a>
+            <a className={`link-header rounded-lg m-2 md:m-3 ${isActive('/men')}`} href="/men">
+              Men
             </a>
           </nav>
           <a href="http://localhost:5173/">
-          <h1 className="text-5xl">ChicPath</h1>
+            <h1 className="text-5xl">ChicPath</h1>
           </a>
           <nav className="flex flex-col md:flex-row mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-4">
-            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="./Signup">
-              Sign up
+            <a className={`link-header rounded-lg p-2 md:p-3 ${isActive('/search')}`} href="/search">
+              <i className="fa-solid fa-magnifying-glass"></i>
             </a>
-            <a className="hover:bg-white rounded-lg p-2 md:p-3" href="./Login">
-              Login
+            <a className={`link-header rounded-lg p-2 md:p-3 ${isActive('/wishlist')}`} href="/wishlist">
+              <i className="fa-solid fa-heart"></i>
+            </a>
+            <div 
+              className="relative flex justify-between items-center"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <a className="rounded-lg p-2 md:p-3">
+                <i className="fa-solid fa-user"></i>
+              </a>
+              {showDropdown && (
+                <div className="absolute right-0 mt-32 bg-white shadow-lg rounded-lg border border-gray-200 w-40">
+                  <a href="/login" className="link-header block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">
+                    Login
+                  </a>
+                  <a href="/signup" className="link-header block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded">
+                    Sign Up
+                  </a>
+                </div>
+              )}
+            </div>
+            <a className={`link-header rounded-lg p-2 md:p-3 ${isActive('/shopping')}`} href="/shopping">
+              <i className="fa-solid fa-cart-shopping"></i>
             </a>
           </nav>
         </div>
