@@ -1,35 +1,21 @@
-import React from 'react';
-import item1 from "../assets/item1.png";
-import item2 from "../assets/item2.png";
-import item3 from "../assets/item3.png";
+import React, { useState, useEffect } from 'react';
 
 function ShoppingCart() {
-  const cartItems = [
-    {
-      id: 1,
-      name: 'Item 1',
-      price: 29.99,
-      quantity: 2,
-      image: item1,
-    },
-    {
-      id: 2,
-      name: 'Item 2',
-      price: 39.99,
-      quantity: 1,
-      image: item2,
-    },
-    {
-      id: 3,
-      name: 'Item 3',
-      price: 49.99,
-      quantity: 1,
-      image: item3,
-    },
-  ];
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartItems(storedCart);
+  }, []);
 
   const getTotalPrice = () =>
     cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+  const handleRemoveItem = (id, size) => {
+    const updatedCart = cartItems.filter(item => !(item.id === id && item.size === size));
+    setCartItems(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -39,18 +25,22 @@ function ShoppingCart() {
       ) : (
         <div className="bg-white shadow-md rounded-lg p-4">
           {cartItems.map((item) => (
-            <div key={item.id} className="flex items-center mb-4 border-b pb-4">
+            <div key={`${item.id}-${item.size}`} className="flex items-center mb-4 border-b pb-4">
               <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded mr-4" />
               <div className="flex-grow">
                 <h3 className="text-xl">{item.name}</h3>
                 <p>€{item.price.toFixed(2)}</p>
+                <p>Size: {item.size}</p>
                 <p>Quantity: {item.quantity}</p>
               </div>
               <div className="text-right">
                 <p className="text-xl">
                   €{(item.price * item.quantity).toFixed(2)}
                 </p>
-                <button className="text-red-500 hover:text-red-700">
+                <button
+                  onClick={() => handleRemoveItem(item.id, item.size)}
+                  className="text-red-500 hover:text-red-700"
+                >
                   Remove
                 </button>
               </div>

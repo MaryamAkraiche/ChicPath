@@ -44,7 +44,21 @@ function ProductDetail() {
     setWishlist(storedWishlist);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  }, [wishlist]);
+
   const handleAddToCart = () => {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(item => item.id === product.id && item.size === selectedSize);
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({ ...product, size: selectedSize, quantity });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
     console.log(`Added to cart: ${product.name}, Size: ${selectedSize}, Quantity: ${quantity}`);
   };
 
@@ -56,7 +70,6 @@ function ProductDetail() {
       updatedWishlist = [...wishlist, product];
     }
     setWishlist(updatedWishlist);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
   };
 
   const isProductInWishlist = wishlist.some(item => item.id === product.id);
@@ -98,7 +111,7 @@ function ProductDetail() {
             <input
               type="number"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => setQuantity(Number(e.target.value))}
               min="1"
               className="block w-fit p-2 border border-gray-300 rounded"
               placeholder="1"
